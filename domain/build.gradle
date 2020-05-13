@@ -7,6 +7,7 @@ dependencies {
     api libs.timber
 
     api rx.values()
+    api javax.values()
 
     //test
     testApi testLibs.values()

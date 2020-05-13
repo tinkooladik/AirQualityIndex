@@ -11,31 +11,22 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 object ApiServiceFactory {
 
     fun makeService(
-        url: String,
         isDebug: Boolean
     ): ApiService =
         makeService(
-            url,
             makeClient(
-                makeLogger(true)
+                makeLogger(true),
+                AuthInterceptor(BuildConfig.API_TOKEN)
             ),
             ApiService::class.java
         )
 
-    private fun makeClient(
-        logger: HttpLoggingInterceptor
-    ): OkHttpClient =
-        OkHttpClient.Builder()
-            .addInterceptor(logger)
-            .build()
-
     private fun <T> makeService(
-        url: String,
         okHttpClient: OkHttpClient,
         cl: Class<T>
     ): T =
         Retrofit.Builder()
-            .baseUrl(url)
+            .baseUrl(BuildConfig.API_ENDPOINT)
             .client(okHttpClient)
             .addConverterFactory(
                 nonstrictJson.asConverterFactory(
@@ -45,6 +36,15 @@ object ApiServiceFactory {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(cl)
+
+    private fun makeClient(
+        logger: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
+    ): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .addInterceptor(authInterceptor)
+            .build()
 
     private fun makeLogger(isDebug: Boolean) =
         HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)

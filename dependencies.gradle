@@ -19,18 +19,19 @@ ext {
             rxkotlin                     : '2.4.0',
             retrofit                     : '2.6.2',
             okhttp3                      : '4.6.0',
-            kotlinxSerialization         : '0.13.0',
+            kotlinxSerialization         : '0.20.0',
             kotlinxSerializationConverter: '0.4.0',
             jUnit                        : '4.13',
             mockito                      : '2.1.0',
             timber                       : '4.7.1',
             dagger                       : '2.27',
+            javaxAnnotation              : '1.0',
+            javaxInject                  : '1',
             //ui
             appcompat                    : '1.1.0',
             constraint                   : '1.1.3',
             navigation                   : "2.2.2",
     ]
-
 
     libs = [
             kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}",
@@ -60,6 +61,11 @@ ext {
             material   : "com.google.android.material:material:${versions.appcompat}",
             navUi      : "androidx.navigation:navigation-ui-ktx:${versions.navigation}",
             navFragment: "androidx.navigation:navigation-fragment-ktx:${versions.navigation}",
+    ]
+
+    javax = [
+            annotation: "javax.annotation:jsr250-api:${versions.javaxAnnotation}",
+            inject    : "javax.inject:javax.inject:${versions.javaxInject}",
     ]
 
     testLibs = [
