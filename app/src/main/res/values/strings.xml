@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Air quality index</string>
 
+    <!-- home -->
+    <string name="home_station_id">id: %s</string>
+    <string name="home_station_index_title">AQI:</string>
+
     <!-- errors -->
     <string name="error_no_connection">Network error. Please check your internet connection</string>
     <string name="error_unknown_error">Oops! Something went wrong…</string>

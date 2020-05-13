@@ -17,7 +17,7 @@ abstract class ObservableUseCase<ParamType : Any, ResultType : Any>(schedulerPro
         val item = buildObservable(params)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
-            .doOnTerminate(onComplete)
+            .doOnEach { onComplete() }
             .subscribe({ onNext(it) }, { onError(it) })
         subscription.add(item)
     }
@@ -33,7 +33,7 @@ abstract class ObservableUseCase<ParamType : Any, ResultType : Any>(schedulerPro
             .map { mapper.mapTo(it) }
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
-            .doOnTerminate(onComplete)
+            .doOnEach { onComplete() }
             .subscribe({ onNext(it) }, { onError(it) })
         subscription.add(item)
     }

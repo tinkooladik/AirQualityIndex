@@ -1,5 +1,6 @@
 package com.tinkooladik.airqualityindex.common.base
 
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.tinkooladik.airqualityindex.util.SingleLiveEvent
@@ -7,6 +8,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel : ViewModel() {
+
+    var loading: ObservableBoolean = ObservableBoolean(false)
 
     val error: LiveData<Throwable>
         get() = _error
