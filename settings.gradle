@@ -1,0 +1,4 @@
+rootProject.name='Air quality index'
+include ':app'
+include ':domain'
+include ':data'

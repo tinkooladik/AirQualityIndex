@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Air quality index</string>
+
+    <!-- errors -->
+    <string name="error_no_connection">Network error. Please check your internet connection</string>
+    <string name="error_unknown_error">Oops! Something went wrong…</string>
+</resources>

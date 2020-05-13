@@ -1,0 +1,13 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
+    api libs.kotlin
+    api libs.timber
+
+    api rx.values()
+
+    //test
+    testApi testLibs.values()
+}

@@ -1,0 +1,26 @@
+package com.tinkooladik.airqualityindex.common.base
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import com.tinkooladik.airqualityindex.util.SingleLiveEvent
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+
+abstract class BaseViewModel : ViewModel() {
+
+    val error: LiveData<Throwable>
+        get() = _error
+
+    private val _error = SingleLiveEvent<Throwable>()
+
+    private var disposables: CompositeDisposable = CompositeDisposable()
+
+    open fun initViewModel() {}
+
+    override fun onCleared() {
+        disposables.clear()
+        super.onCleared()
+    }
+
+    protected fun Disposable.disposeOnClear() = disposables.add(this)
+}
