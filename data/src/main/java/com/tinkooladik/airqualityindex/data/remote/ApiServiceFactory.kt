@@ -1,6 +1,8 @@
-package com.tinkooladik.airqualityindex.data
+package com.tinkooladik.airqualityindex.data.remote
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.tinkooladik.airqualityindex.data.BuildConfig
+import com.tinkooladik.airqualityindex.data.nonstrictJson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,7 +17,7 @@ object ApiServiceFactory {
     ): ApiService =
         makeService(
             makeClient(
-                makeLogger(true),
+                makeLogger(isDebug),
                 AuthInterceptor(BuildConfig.API_TOKEN)
             ),
             ApiService::class.java

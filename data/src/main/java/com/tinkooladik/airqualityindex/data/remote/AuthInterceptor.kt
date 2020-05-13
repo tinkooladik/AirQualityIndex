@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.data
+package com.tinkooladik.airqualityindex.data.remote
 
 import okhttp3.Interceptor
 import okhttp3.Response

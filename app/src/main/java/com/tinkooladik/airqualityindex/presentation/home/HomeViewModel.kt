@@ -11,7 +11,8 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     override fun initViewModel() {
-        getStationsDataUseCase.execute(GetStationsDataUseCase.Params(0.0, 0.0, 0.0, 0.0),
+        getStationsDataUseCase.execute(
+            GetStationsDataUseCase.Params(100, 100),
             onNext = { logInfo("stations loaded: ${it.size}") },
             onError = { logError("failed to load stations data", it) })
     }

@@ -11,7 +11,7 @@ data class ApiStationResponse(
     val lat: Double,
     val lon: Double,
     val uid: Int,
-    val aqi: Int,
+    val aqi: String,
     val station: ApiStation
 )
 
@@ -31,7 +31,7 @@ class ApiStationDataMapper @Inject constructor(
             name = item.station.name,
             lat = item.lat,
             lng = item.lon,
-            index = item.aqi,
+            index = item.aqi.toIntOrNull() ?: -1,
             lastUpdated = dateFormatProvider.parse(item.station.time)
         )
 }

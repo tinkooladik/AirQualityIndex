@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlinx-serialization'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -32,6 +33,10 @@ dependencies {
 
     api libs.ktx
     api libs.kotlinxSerialization
+
+    api libs.room
+    implementation libs.roomRx
+    kapt libs.roomCompiler
 
     implementation retrofit.values()
 }

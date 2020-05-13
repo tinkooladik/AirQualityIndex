@@ -1,8 +1,8 @@
 package com.tinkooladik.airqualityindex.common.message
 
 import android.content.Context
+import com.tinkooladik.airqualityindex.domain.weak
 import com.tinkooladik.airqualityindex.util.toast
-import com.tinkooladik.airqualityindex.util.weak
 
 class ToastMessageHandler constructor(context: Context?) : MessageHandler {
 

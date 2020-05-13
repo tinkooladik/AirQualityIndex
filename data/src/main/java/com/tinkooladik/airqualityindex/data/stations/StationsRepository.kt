@@ -1,5 +1,6 @@
 package com.tinkooladik.airqualityindex.data.stations
 
+import com.tinkooladik.airqualityindex.domain.providers.LatLngBounds
 import com.tinkooladik.airqualityindex.domain.providers.StationData
 import com.tinkooladik.airqualityindex.domain.providers.StationsDataProvider
 import io.reactivex.Observable
@@ -10,13 +11,24 @@ class StationsRepository @Inject constructor(
     private val remote: StationsRemoteDataSource
 ) : StationsDataProvider {
 
-    override fun getStationsData(
-        lat1: Double,
-        lng1: Double,
-        lat2: Double,
-        lng2: Double
-    ): Observable<List<StationData>> {
-        return remote.getStationsData(lat1, lng1, lat2, lng2).toObservable()
+    override fun getStationsData(bounds: LatLngBounds): Observable<List<StationData>> {
+        return Observable.concatArrayEager(
+            local.getStations(bounds),
+            loadStations(bounds)
+        )
     }
 
+    private fun loadStations(bounds: LatLngBounds) =
+        Observable.defer {
+            remote.getStationsData(bounds)
+                .flatMapObservable { new ->
+                    local.getStations(bounds)
+                        .take(1)
+                        .flatMap { old ->
+                            local.removeStations(old)
+                                .andThen(local.saveStations(new))
+                                .andThen(Observable.just(new))
+                        }
+                }
+        }
 }

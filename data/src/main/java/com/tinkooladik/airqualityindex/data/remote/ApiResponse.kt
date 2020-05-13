@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.data
+package com.tinkooladik.airqualityindex.data.remote
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

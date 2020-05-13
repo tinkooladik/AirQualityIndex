@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.util
+package com.tinkooladik.airqualityindex.domain
 
 import java.lang.ref.WeakReference
 import kotlin.properties.ReadWriteProperty
@@ -22,6 +22,7 @@ class WeakRef<T>(obj: T? = null) : ReadWriteProperty<Any?, T?> {
     }
 }
 
-fun <T> weak(obj: T? = null) = WeakRef(obj)
+fun <T> weak(obj: T? = null) =
+    WeakRef(obj)
 
 fun <T> T.weak() = WeakReference(this)

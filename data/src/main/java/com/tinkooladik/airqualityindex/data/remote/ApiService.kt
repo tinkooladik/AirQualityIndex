@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.data
+package com.tinkooladik.airqualityindex.data.remote
 
 import com.tinkooladik.airqualityindex.data.stations.ApiStationResponse
 import io.reactivex.Single
