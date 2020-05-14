@@ -4,6 +4,8 @@
     <!-- home -->
     <string name="home_station_id">id: %s</string>
     <string name="home_station_index_title">AQI:</string>
+    <string name="home_filter_radius">Search radius:</string>
+    <string name="home_filter_index">Min index:</string>
 
     <!-- errors -->
     <string name="error_no_connection">Network error. Please check your internet connection</string>

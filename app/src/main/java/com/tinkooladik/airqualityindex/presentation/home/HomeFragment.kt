@@ -46,7 +46,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
         Manifest.permission.ACCESS_FINE_LOCATION
     )
     fun loadStations() {
-        viewModel.loadStations()
+        viewModel.start()
     }
 
     @OnPermissionDenied(

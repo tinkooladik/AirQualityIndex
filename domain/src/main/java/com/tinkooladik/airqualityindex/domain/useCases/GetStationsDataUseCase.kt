@@ -20,7 +20,11 @@ class GetStationsDataUseCase @Inject constructor(
             .observeOn(schedulerProvider.io())
             .flatMapObservable { bounds ->
                 stationsDataProvider.getStationsData(bounds)
-                    .map { it.filter { it.index >= params.minIndex } }
+            }.switchMap { stations ->
+                Observable.fromIterable(stations)
+                    .filter { it.index >= params.minIndex }
+                    .toList()
+                    .toObservable()
             }
             .observeOn(schedulerProvider.ui())
     }

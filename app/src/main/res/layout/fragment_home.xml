@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,17 +12,53 @@
         <import type="android.view.View" />
     </data>
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvStations"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:visibility="@{viewModel.loading ? View.GONE : View.VISIBLE}"
-            tools:listitem="@layout/item_home_station" />
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/home_filter_radius" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerRadius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@{viewModel.radiusValues}"
+                android:onItemSelected="@{(p, v, pos, id) -> viewModel.selectRadius(pos)}"
+                app:defaultValue="@{String.valueOf(viewModel.Companion.DEFAULT_RADIUS)}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/home_filter_index" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerIndex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@{viewModel.minIndexValues}"
+                android:onItemSelected="@{(p, v, pos, id) -> viewModel.selectMinIndex(pos)}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:visibility="@{viewModel.loading ? View.GONE : View.VISIBLE}"
+                tools:listitem="@layout/item_home_station" />
+        </LinearLayout>
 
         <include
             android:id="@+id/progress"
