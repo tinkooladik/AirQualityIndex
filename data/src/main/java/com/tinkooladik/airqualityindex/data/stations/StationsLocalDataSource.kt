@@ -4,12 +4,12 @@ import com.tinkooladik.airqualityindex.data.logInfo
 import com.tinkooladik.airqualityindex.domain.providers.LatLngBounds
 import com.tinkooladik.airqualityindex.domain.providers.StationData
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 interface StationsLocalDataSource {
 
-    fun getStations(bounds: LatLngBounds): Observable<List<StationData>>
+    fun getStations(bounds: LatLngBounds): Single<List<StationData>>
 
     fun saveStations(stations: List<StationData>): Completable
 
@@ -21,19 +21,16 @@ class StationsRoomDataSource @Inject constructor(
     private val localStationDataMapper: LocalStationDataMapper
 ) : StationsLocalDataSource {
 
-    override fun getStations(bounds: LatLngBounds): Observable<List<StationData>> =
+    override fun getStations(bounds: LatLngBounds): Single<List<StationData>> =
         stationsDao.getAll(
             bounds.southwest.lat,
             bounds.southwest.lng,
             bounds.northeast.lat,
             bounds.northeast.lng
         )
-            .flatMap { stations ->
+            .map { stations ->
                 logInfo("got ${stations.size} stations from room")
-                Observable.fromIterable(stations)
-                    .map { localStationDataMapper.mapFrom(it) }
-                    .toList()
-                    .toObservable()
+                stations.map { localStationDataMapper.mapFrom(it) }
             }
 
     override fun saveStations(stations: List<StationData>): Completable =

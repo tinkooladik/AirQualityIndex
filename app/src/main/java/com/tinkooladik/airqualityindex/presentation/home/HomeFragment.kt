@@ -35,7 +35,10 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
 
         // init adapter
         rvStations.initWithAdapter(adapter)
-        observe(viewModel.items) { adapter.items = it }
+        observe(viewModel.items) {
+            adapter.items = it
+            rvStations.scrollToPosition(0)
+        }
         adapter.onItemClickListener = { context?.toast(it.name ?: "") }
 
         loadStationsWithPermissionCheck()

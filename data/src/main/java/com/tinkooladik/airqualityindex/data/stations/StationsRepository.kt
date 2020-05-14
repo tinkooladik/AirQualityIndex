@@ -1,9 +1,11 @@
 package com.tinkooladik.airqualityindex.data.stations
 
+import com.tinkooladik.airqualityindex.data.logError
 import com.tinkooladik.airqualityindex.domain.providers.LatLngBounds
 import com.tinkooladik.airqualityindex.domain.providers.StationData
 import com.tinkooladik.airqualityindex.domain.providers.StationsDataProvider
 import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 class StationsRepository @Inject constructor(
@@ -13,22 +15,19 @@ class StationsRepository @Inject constructor(
 
     //fixme I guess we shouldn't load data from api every time. mb add some check for last updated time
     override fun getStationsData(bounds: LatLngBounds): Observable<List<StationData>> {
-        return Observable.concatArrayEager(
-            local.getStations(bounds),
-            loadStations(bounds)
-        )
+        return local.getStations(bounds).concatWith(loadStations(bounds)).toObservable()
     }
 
     private fun loadStations(bounds: LatLngBounds) =
-        Observable.defer {
+        Single.defer {
+            logError("loadStations")
             remote.getStationsData(bounds)
-                .flatMapObservable { new ->
+                .flatMap { new ->
                     local.getStations(bounds)
-                        .take(1)
                         .flatMap { old ->
                             local.removeStations(old)
                                 .andThen(local.saveStations(new))
-                                .andThen(Observable.just(new))
+                                .andThen(Single.just(new))
                         }
                 }
         }

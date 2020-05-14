@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Single
 
 @Dao
 abstract class StationsDao {
@@ -22,5 +22,5 @@ abstract class StationsDao {
         lng1: Double,
         lat2: Double,
         lng2: Double
-    ): Observable<List<RoomStationData>>
+    ): Single<List<RoomStationData>>
 }

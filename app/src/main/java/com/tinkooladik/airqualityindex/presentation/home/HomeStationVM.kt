@@ -9,6 +9,17 @@ class HomeStationVM : BaseObservable() {
     var name: String? = null
     var id: Int? = null
     var index: Int? = null
+
+    override fun equals(other: Any?): Boolean {
+        return other is HomeStationVM && id == other.id && index == other.index
+    }
+
+    override fun hashCode(): Int {
+        var result = name?.hashCode() ?: 0
+        result = 31 * result + (id ?: 0)
+        result = 31 * result + (index ?: 0)
+        return result
+    }
 }
 
 class HomeStationVmMapper @Inject constructor() : MapperTo<List<StationData>, List<HomeStationVM>> {

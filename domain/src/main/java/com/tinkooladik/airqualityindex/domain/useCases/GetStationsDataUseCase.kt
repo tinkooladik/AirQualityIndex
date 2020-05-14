@@ -23,7 +23,7 @@ class GetStationsDataUseCase @Inject constructor(
             }.switchMap { stations ->
                 Observable.fromIterable(stations)
                     .filter { it.index >= params.minIndex }
-                    .toList()
+                    .toSortedList { o1, o2 -> o1.index.compareTo(o2.index) }
                     .toObservable()
             }
             .observeOn(schedulerProvider.ui())
