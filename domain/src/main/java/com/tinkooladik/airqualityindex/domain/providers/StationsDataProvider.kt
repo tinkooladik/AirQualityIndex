@@ -17,11 +17,13 @@ data class StationData(
 )
 
 data class LatLngBounds(
-    val lat1: Double,
-    val lng1: Double,
-    val lat2: Double,
-    val lng2: Double
+    val southwest: LatLng,
+    val northeast: LatLng
 ) {
-    fun asString() = "$lat1,$lng1,$lat2,$lng2"
-    fun isWithin(lat: Double, lng: Double) = lat in lat1..lat2 && lng in lng1..lng2
+    fun asString() = "${southwest.lat},${southwest.lng},${northeast.lat},${northeast.lng}"
 }
+
+data class LatLng(
+    val lat: Double,
+    val lng: Double
+)

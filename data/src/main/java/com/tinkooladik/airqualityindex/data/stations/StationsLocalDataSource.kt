@@ -22,7 +22,12 @@ class StationsRoomDataSource @Inject constructor(
 ) : StationsLocalDataSource {
 
     override fun getStations(bounds: LatLngBounds): Observable<List<StationData>> =
-        stationsDao.getAll(bounds.lat1, bounds.lng1, bounds.lat2, bounds.lng2)
+        stationsDao.getAll(
+            bounds.southwest.lat,
+            bounds.southwest.lng,
+            bounds.northeast.lat,
+            bounds.northeast.lng
+        )
             .flatMap { stations ->
                 logInfo("got ${stations.size} stations from room")
                 Observable.fromIterable(stations)

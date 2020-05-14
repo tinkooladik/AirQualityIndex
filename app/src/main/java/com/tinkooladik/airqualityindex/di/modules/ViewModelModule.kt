@@ -17,11 +17,6 @@ abstract class ViewModelModule {
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(vm: HomeViewModel): BaseViewModel
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(UserContextViewModel::class)
-//    abstract fun bindCurrentUserViewModel(vm: UserContextViewModel): AppViewModel
-
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 }

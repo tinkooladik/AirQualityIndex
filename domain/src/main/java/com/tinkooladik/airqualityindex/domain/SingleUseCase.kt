@@ -6,10 +6,10 @@ import io.reactivex.Single
 abstract class SingleUseCase<ParamType : Any, ResultType : Any>(schedulerProvider: SchedulersProvider) :
     UseCase(schedulerProvider) {
 
-    protected abstract fun buildSingle(params: ParamType?): Single<ResultType>
+    protected abstract fun buildSingle(params: ParamType): Single<ResultType>
 
     fun execute(
-        params: ParamType? = null,
+        params: ParamType,
         onNext: (ResultType) -> Unit,
         onError: (Throwable) -> Unit = { },
         onComplete: () -> Unit = {}
@@ -23,7 +23,7 @@ abstract class SingleUseCase<ParamType : Any, ResultType : Any>(schedulerProvide
     }
 
     fun <NewType> execute(
-        params: ParamType?,
+        params: ParamType,
         mapper: MapperTo<ResultType, NewType>,
         onNext: (NewType) -> Unit,
         onError: (Throwable) -> Unit = { },

@@ -38,6 +38,13 @@ dependencies {
     implementation project(":domain")
     implementation project(":data")
 
+    //location
+    implementation libs.gmsLocation
+
+    //permissions
+    implementation libs.permissions
+    kapt libs.permissionsProcessor
+
     //ui
     implementation uiLibs.values()
 

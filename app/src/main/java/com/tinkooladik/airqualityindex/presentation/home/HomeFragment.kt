@@ -1,5 +1,6 @@
 package com.tinkooladik.airqualityindex.presentation.home
 
+import android.Manifest
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -12,7 +13,11 @@ import com.tinkooladik.airqualityindex.databinding.FragmentHomeBinding
 import com.tinkooladik.airqualityindex.util.initWithAdapter
 import com.tinkooladik.airqualityindex.util.toast
 import kotlinx.android.synthetic.main.fragment_home.*
+import permissions.dispatcher.NeedsPermission
+import permissions.dispatcher.OnPermissionDenied
+import permissions.dispatcher.RuntimePermissions
 
+@RuntimePermissions
 @LayoutSettings(layoutId = R.layout.fragment_home)
 class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), HomeErrorHandler {
 
@@ -32,5 +37,24 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
         rvStations.initWithAdapter(adapter)
         observe(viewModel.items) { adapter.items = it }
         adapter.onItemClickListener = { context?.toast(it.name ?: "") }
+
+        loadStationsWithPermissionCheck()
+    }
+
+    @NeedsPermission(
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    )
+    fun loadStations() {
+        viewModel.loadStations()
+    }
+
+    @OnPermissionDenied(
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    )
+    fun onLocationDenied() {
+        //todo handle this
+        loadStationsWithPermissionCheck()
     }
 }

@@ -11,6 +11,7 @@ class StationsRepository @Inject constructor(
     private val remote: StationsRemoteDataSource
 ) : StationsDataProvider {
 
+    //fixme I guess we shouldn't load data from api every time. mb add some check for last updated time
     override fun getStationsData(bounds: LatLngBounds): Observable<List<StationData>> {
         return Observable.concatArrayEager(
             local.getStations(bounds),

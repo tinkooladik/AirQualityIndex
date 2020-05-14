@@ -17,13 +17,19 @@ class HomeViewModel @Inject constructor(
 
     private val _items = SingleLiveEvent<List<HomeStationVM>>()
 
-    override fun initViewModel() {
+    override fun initViewModel() {}
+
+    fun loadStations() {
+        logError("loadStations")
         loading.set(true)
         getStationsDataUseCase.execute(
-            GetStationsDataUseCase.Params(100, 100),
+            GetStationsDataUseCase.Params(100, 20),
             mapper = homeStationVmMapper,
             onNext = { _items.value = it },
-            onError = { logError("failed to load stations data", it) },
+            onError = {
+                _error.value = it
+                logError("failed to load stations data", it)
+            },
             onComplete = { loading.set(false) })
     }
 }

@@ -14,7 +14,7 @@ abstract class BaseViewModel : ViewModel() {
     val error: LiveData<Throwable>
         get() = _error
 
-    private val _error = SingleLiveEvent<Throwable>()
+    protected val _error = SingleLiveEvent<Throwable>()
 
     private var disposables: CompositeDisposable = CompositeDisposable()
 

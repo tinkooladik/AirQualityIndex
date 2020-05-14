@@ -6,10 +6,10 @@ import io.reactivex.Observable
 abstract class ObservableUseCase<ParamType : Any, ResultType : Any>(schedulerProvider: SchedulersProvider) :
     UseCase(schedulerProvider) {
 
-    protected abstract fun buildObservable(params: ParamType?): Observable<ResultType>
+    protected abstract fun buildObservable(params: ParamType): Observable<ResultType>
 
     fun execute(
-        params: ParamType? = null,
+        params: ParamType,
         onNext: (ResultType) -> Unit,
         onError: (Throwable) -> Unit = { },
         onComplete: () -> Unit = {}
@@ -23,7 +23,7 @@ abstract class ObservableUseCase<ParamType : Any, ResultType : Any>(schedulerPro
     }
 
     fun <NewType> execute(
-        params: ParamType?,
+        params: ParamType,
         mapper: MapperTo<ResultType, NewType>,
         onNext: (NewType) -> Unit,
         onError: (Throwable) -> Unit = { },
