@@ -13,6 +13,7 @@ class GetStationDetailsUseCase @Inject constructor(
 ) : SingleUseCase<Int, StationData>(schedulersProvider) {
 
     override fun buildSingle(params: Int): Single<StationData> {
+        //todo load some extra info from api
         return stationsDataProvider.getStationById(params).toSingle()
     }
 }
