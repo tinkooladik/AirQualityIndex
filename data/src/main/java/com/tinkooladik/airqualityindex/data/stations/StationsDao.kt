@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import io.reactivex.Completable
-import io.reactivex.Single
+import io.reactivex.Maybe
 
 @Dao
 abstract class StationsDao {
@@ -22,5 +22,5 @@ abstract class StationsDao {
         lng1: Double,
         lat2: Double,
         lng2: Double
-    ): Single<List<RoomStationData>>
+    ): Maybe<List<RoomStationData>>
 }
