@@ -5,6 +5,7 @@ import com.tinkooladik.airqualityindex.common.base.BaseViewModel
 import com.tinkooladik.airqualityindex.di.ViewModelFactory
 import com.tinkooladik.airqualityindex.di.ViewModelKey
 import com.tinkooladik.airqualityindex.presentation.home.HomeViewModel
+import com.tinkooladik.airqualityindex.presentation.station_details.StationDetailsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -16,6 +17,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(vm: HomeViewModel): BaseViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StationDetailsViewModel::class)
+    abstract fun bindDetailsViewModel(vm: StationDetailsViewModel): BaseViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

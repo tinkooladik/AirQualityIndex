@@ -9,11 +9,21 @@
         android:name="com.tinkooladik.airqualityindex.presentation.home.HomeFragment"
         android:label="Home">
 
-        <!--        <action-->
-        <!--            android:id="@+id/action_fragmentLogin_to_fragmentHost"-->
-        <!--            app:destination="@id/fragmentUserContext"-->
-        <!--            app:popUpTo="@+id/nav_graph"-->
-        <!--            app:popUpToInclusive="true" />-->
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentDetails"
+            app:destination="@id/fragmentDetails" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentDetails"
+        android:name="com.tinkooladik.airqualityindex.presentation.station_details.StationDetailsFragment"
+        android:label="Details">
+
+        <argument
+            android:name="stationId"
+            app:argType="integer" />
+
     </fragment>
 
 </navigation>

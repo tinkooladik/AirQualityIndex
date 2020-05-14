@@ -9,6 +9,8 @@ import javax.inject.Inject
 
 interface StationsLocalDataSource {
 
+    fun getStationById(id: Int): Maybe<StationData>
+
     fun getStations(bounds: LatLngBounds): Maybe<List<StationData>>
 
     fun saveStations(stations: List<StationData>): Completable
@@ -21,8 +23,12 @@ class StationsRoomDataSource @Inject constructor(
     private val localStationDataMapper: LocalStationDataMapper
 ) : StationsLocalDataSource {
 
+    override fun getStationById(id: Int): Maybe<StationData> =
+        stationsDao.getById(id).map { localStationDataMapper.mapFrom(it) }
+            .doOnEvent { t1, t2 -> logInfo("got ${t1.name} station for id=$id from room") }
+
     override fun getStations(bounds: LatLngBounds): Maybe<List<StationData>> =
-        stationsDao.getAll(
+        stationsDao.getAllInBounds(
             bounds.southwest.lat,
             bounds.southwest.lng,
             bounds.northeast.lat,

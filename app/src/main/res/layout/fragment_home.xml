@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:entries="@{viewModel.radiusValues}"
                 android:onItemSelected="@{(p, v, pos, id) -> viewModel.selectRadius(pos)}"
-                app:defaultValue="@{String.valueOf(viewModel.Companion.DEFAULT_RADIUS)}" />
+                app:defaultValue="@{viewModel.currentRadius}" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,7 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@{viewModel.minIndexValues}"
-                android:onItemSelected="@{(p, v, pos, id) -> viewModel.selectMinIndex(pos)}" />
+                android:onItemSelected="@{(p, v, pos, id) -> viewModel.selectMinIndex(pos)}"
+                app:defaultValue="@{viewModel.currentMinIndex}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvStations"

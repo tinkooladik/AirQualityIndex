@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.tinkooladik.airqualityindex.BR
 import com.tinkooladik.airqualityindex.R
 import com.tinkooladik.airqualityindex.common.LayoutSettings
@@ -11,7 +13,6 @@ import com.tinkooladik.airqualityindex.common.adapter.SimpleAdapter
 import com.tinkooladik.airqualityindex.common.binding.BaseBindingFragment
 import com.tinkooladik.airqualityindex.databinding.FragmentHomeBinding
 import com.tinkooladik.airqualityindex.util.initWithAdapter
-import com.tinkooladik.airqualityindex.util.toast
 import kotlinx.android.synthetic.main.fragment_home.*
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnPermissionDenied
@@ -23,7 +24,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
 
     override fun getVar(): Int = BR.viewModel
 
-    val adapter = SimpleAdapter<HomeStationVM>(R.layout.item_home_station, BR.station)
+    val adapter = SimpleAdapter<StationVM>(R.layout.item_home_station, BR.station)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,7 +39,11 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
             adapter.items = it
             rvStations.scrollToPosition(0)
         }
-        adapter.onItemClickListener = { context?.toast(it.name ?: "") }
+        adapter.onItemClickListener = { station ->
+            findNavController().navigate(
+                ActionFragmentHomeToFragmentDetails(station.id ?: 0)
+            )
+        }
 
         loadStationsWithPermissionCheck()
     }
@@ -67,5 +72,16 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
+    }
+}
+
+data class ActionFragmentHomeToFragmentDetails(
+    val stationId: Int
+) : NavDirections {
+
+    override fun getActionId(): Int = R.id.action_fragmentHome_to_fragmentDetails
+
+    override fun getArguments(): Bundle {
+        return Bundle().apply { putInt("stationId", stationId) }
     }
 }

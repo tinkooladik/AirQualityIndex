@@ -9,22 +9,30 @@ import io.reactivex.rxkotlin.Observables
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
+const val DEFAULT_RADIUS = 20
+const val DEFAULT_MIN_INDEX = 0
 
 class HomeViewModel @Inject constructor(
     private val getStationsDataUseCase: GetStationsDataUseCase,
-    private val homeStationVmMapper: HomeStationVmMapper
+    private val stationsListVmMapper: StationsListVmMapper
 ) : BaseViewModel() {
 
-    val items: LiveData<List<HomeStationVM>>
+    val items: LiveData<List<StationVM>>
         get() = _items
 
     val radiusValues = arrayListOf(5, 10, 20, 50, 100)
     val minIndexValues = arrayListOf(0, 5, 10, 20, 50, 100, 200)
 
+    val currentRadius: String?
+        get() = radiusSubject.value.toString()
+
+    val currentMinIndex: String?
+        get() = minIndexSubject.value.toString()
+
     private var radiusSubject = BehaviorSubject.createDefault(DEFAULT_RADIUS)
     private var minIndexSubject = BehaviorSubject.createDefault(DEFAULT_MIN_INDEX)
 
-    private val _items = SingleLiveEvent<List<HomeStationVM>>()
+    private val _items = SingleLiveEvent<List<StationVM>>()
 
     fun start() {
         Observables.combineLatest(
@@ -33,20 +41,6 @@ class HomeViewModel @Inject constructor(
         ) { r, i -> loadStations(r, i) }
             .subscribe()
             .disposeOnClear()
-    }
-
-    private fun loadStations(radius: Int, minIndex: Int) {
-        logError("loadStations $radius, $minIndex")
-        loading.set(true)
-        getStationsDataUseCase.execute(
-            GetStationsDataUseCase.Params(radius, minIndex),
-            mapper = homeStationVmMapper,
-            onNext = { _items.value = it },
-            onError = {
-                _error.value = it
-                logError("failed to load stations data", it)
-            },
-            onComplete = { loading.set(false) })
     }
 
     //todo use binding adapter instead
@@ -59,8 +53,16 @@ class HomeViewModel @Inject constructor(
         minIndexSubject.onNext(minIndexValues[pos])
     }
 
-    companion object {
-        val DEFAULT_RADIUS = 20
-        val DEFAULT_MIN_INDEX = 0
+    private fun loadStations(radius: Int, minIndex: Int) {
+        loading.set(true)
+        getStationsDataUseCase.execute(
+            GetStationsDataUseCase.Params(radius, minIndex),
+            mapper = stationsListVmMapper,
+            onNext = { _items.value = it },
+            onError = {
+                _error.value = it
+                logError("failed to load stations data", it)
+            },
+            onComplete = { loading.set(false) })
     }
 }

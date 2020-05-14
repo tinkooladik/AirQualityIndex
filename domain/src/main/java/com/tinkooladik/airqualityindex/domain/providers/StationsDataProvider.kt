@@ -1,10 +1,13 @@
 package com.tinkooladik.airqualityindex.domain.providers
 
+import io.reactivex.Maybe
 import io.reactivex.Observable
 
 interface StationsDataProvider {
 
     fun getStationsData(bounds: LatLngBounds): Observable<List<StationData>>
+
+    fun getStationById(id: Int): Maybe<StationData>
 }
 
 data class StationData(
