@@ -1,12 +1,11 @@
 package com.tinkooladik.airqualityindex.common.adapter
 
 import android.view.View
-import androidx.databinding.BaseObservable
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseViewHolder<VM : BaseObservable>(view: View, varId: Int) :
+abstract class BaseViewHolder<VM : ObservableListItem>(view: View, varId: Int) :
     RecyclerView.ViewHolder(view) {
 
     var binding: ViewDataBinding? = null

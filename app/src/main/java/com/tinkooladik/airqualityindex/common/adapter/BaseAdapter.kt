@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.properties.Delegates
 
-abstract class BaseAdapter<VM : BaseObservable, VH : BaseViewHolder<VM>>
+abstract class BaseAdapter<VM : ObservableListItem, VH : BaseViewHolder<VM>>
     : RecyclerView.Adapter<VH>() {
 
     var onItemClickListener: ((item: VM) -> Unit)? = null
@@ -52,13 +52,22 @@ abstract class BaseAdapter<VM : BaseObservable, VH : BaseViewHolder<VM>>
     ) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            oldItems[oldItemPosition] == newItems[newItemPosition]
+            oldItems[oldItemPosition].isTheSameItem(newItems[newItemPosition])
 
         override fun getOldListSize(): Int = oldItems.size
 
         override fun getNewListSize(): Int = newItems.size
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            areItemsTheSame(oldItemPosition, newItemPosition)
+            oldItems[oldItemPosition] == newItems[newItemPosition]
     }
+}
+
+abstract class ObservableListItem : BaseObservable() {
+
+    /**
+     * Uses for DiffUtil's areItemsTheSame to check whether it's the same item in order to omit
+     * equals() check for the whole list and check only items with the same id, for instance.
+     */
+    abstract fun isTheSameItem(other: Any?): Boolean
 }

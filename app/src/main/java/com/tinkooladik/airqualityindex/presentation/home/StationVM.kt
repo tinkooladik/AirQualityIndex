@@ -1,11 +1,11 @@
 package com.tinkooladik.airqualityindex.presentation.home
 
-import androidx.databinding.BaseObservable
+import com.tinkooladik.airqualityindex.common.adapter.ObservableListItem
 import com.tinkooladik.airqualityindex.domain.MapperTo
 import com.tinkooladik.airqualityindex.domain.providers.StationData
 import javax.inject.Inject
 
-class StationVM : BaseObservable() {
+class StationVM : ObservableListItem() {
     var name: String? = null
     var id: Int? = null
     var index: Int? = null
@@ -14,15 +14,8 @@ class StationVM : BaseObservable() {
     var lastUpdated: Long? = null
     var city: String? = null
 
-    override fun equals(other: Any?): Boolean {
-        return other is StationVM && id == other.id && index == other.index
-    }
-
-    override fun hashCode(): Int {
-        var result = name?.hashCode() ?: 0
-        result = 31 * result + (id ?: 0)
-        result = 31 * result + (index ?: 0)
-        return result
+    override fun isTheSameItem(other: Any?): Boolean {
+        return other is StationVM && id == other.id
     }
 }
 

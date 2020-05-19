@@ -3,10 +3,9 @@ package com.tinkooladik.airqualityindex.common.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.BaseObservable
 
 
-class SimpleAdapter<VM : BaseObservable>(
+class SimpleAdapter<VM : ObservableListItem>(
     private val holderLayout: Int,
     private val variableId: Int
 ) : BaseAdapter<VM, SimpleAdapter<VM>.SimpleBindingHolder<VM>>() {
@@ -16,6 +15,6 @@ class SimpleAdapter<VM : BaseObservable>(
         return SimpleBindingHolder(v)
     }
 
-    inner class SimpleBindingHolder<VM : BaseObservable>(v: View) :
+    inner class SimpleBindingHolder<VM : ObservableListItem>(v: View) :
         BaseViewHolder<VM>(v, variableId)
 }
