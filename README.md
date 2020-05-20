@@ -14,13 +14,16 @@ After click on station item, some more stations-specific info is supposed to loa
 * MVVM
 * Kotlin
 * RxJava
-* Dagger
+* Dagger Android
 * Retrofit
 * Android Architecture Components:
   * Navigation
   * LiveData
   * ViewModel
   * Room
+
+### Tools
+* [Scabbard](https://arunkumar9t2.github.io/scabbard/) to visualize dependency graph
 
 ## In plans:
 * Unit, UI tests
