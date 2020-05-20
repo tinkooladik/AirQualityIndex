@@ -23,7 +23,7 @@ class GetStationsDataUseCase @Inject constructor(
             }.switchMap { stations ->
                 Observable.fromIterable(stations)
                     .filter { it.index >= params.minIndex }
-                    .toSortedList { o1, o2 -> o1.index.compareTo(o2.index) }
+                    .toSortedList(StationsComparator)
                     .toObservable()
             }
             .observeOn(schedulerProvider.ui())
@@ -36,4 +36,13 @@ class GetStationsDataUseCase @Inject constructor(
         val radius: Int,
         val minIndex: Int
     )
+
+    object StationsComparator : Comparator<StationData> {
+        override fun compare(p0: StationData, p1: StationData): Int {
+            val index = p0.index.compareTo(p1.index)
+            if (index != 0) return index
+            return p0.id.compareTo(p1.id)
+        }
+
+    }
 }
