@@ -6,9 +6,8 @@ import com.tinkooladik.airqualityindex.di.modules.DataModule
 import com.tinkooladik.airqualityindex.di.modules.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Singleton
 
-@Singleton
+@AppScope
 @Component(
     modules = [
         AppModule::class,

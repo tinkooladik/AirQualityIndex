@@ -66,8 +66,11 @@ abstract class BaseAdapter<VM : ObservableListItem, VH : BaseViewHolder<VM>>
 abstract class ObservableListItem : BaseObservable() {
 
     /**
-     * Uses for DiffUtil's areItemsTheSame to check whether it's the same item in order to omit
+     * Uses for DiffUtil's areItemsTheSame() to check whether it's the same item or not in order to omit
      * equals() check for the whole list and check only items with the same id, for instance.
+     * Default implementation just checks equals()
      */
-    abstract fun isTheSameItem(other: Any?): Boolean
+    open fun isTheSameItem(other: Any?): Boolean {
+        return this == other
+    }
 }
