@@ -25,7 +25,7 @@ class StationsRoomDataSource @Inject constructor(
 
     override fun getStationById(id: Int): Maybe<StationData> =
         stationsDao.getById(id).map { localStationDataMapper.mapFrom(it) }
-            .doOnEvent { t1, t2 -> logInfo("got ${t1.name} station for id=$id from room") }
+            .doOnEvent { t1, _ -> logInfo("got ${t1.name} station for id=$id from room") }
 
     override fun getStations(bounds: LatLngBounds): Maybe<List<StationData>> =
         stationsDao.getAllInBounds(

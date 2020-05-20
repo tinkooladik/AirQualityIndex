@@ -11,7 +11,7 @@
     <string name="station_details_name">Name: %s</string>
     <string name="station_details_last_update">Last update: %s</string>
     <string name="station_details_city">City: %s</string>
-    <string name="station_details_location">Location: %f, %f</string>
+    <string name="station_details_location">Location: %1$f, %2$f</string>
     <string name="station_details_pm25">Pm 2.5: %f</string>
     <string name="station_details_pm10">Pm 10: %f</string>
 
