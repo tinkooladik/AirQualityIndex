@@ -18,7 +18,6 @@ import javax.inject.Inject
 abstract class BaseBindingFragment<B : ViewDataBinding, VM : BaseViewModel> :
     BaseFragment(), LiveDataObserveProtocol, ErrorHandler {
 
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 

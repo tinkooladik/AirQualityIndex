@@ -7,9 +7,7 @@ import com.tinkooladik.airqualityindex.data.DateFormatProvider
 import com.tinkooladik.airqualityindex.data.local.AppDatabase
 import com.tinkooladik.airqualityindex.data.remote.ApiService
 import com.tinkooladik.airqualityindex.data.remote.ApiServiceFactory
-import com.tinkooladik.airqualityindex.data.stations.*
 import com.tinkooladik.airqualityindex.di.AppScope
-import com.tinkooladik.airqualityindex.domain.providers.StationsDataProvider
 import com.tinkooladik.airqualityindex.util.DateFormatProviderImpl
 import dagger.Binds
 import dagger.Module
@@ -33,26 +31,9 @@ abstract class DataModule {
         @Provides
         @JvmStatic
         fun provideApiService(): ApiService = ApiServiceFactory.makeService(BuildConfig.DEBUG)
-
-        @AppScope
-        @Provides
-        @JvmStatic
-        fun stationsLocalDataSource(
-            db: AppDatabase,
-            localStationDataMapper: LocalStationDataMapper
-        ): StationsLocalDataSource =
-            StationsRoomDataSource(db.stationsDao(), localStationDataMapper)
     }
 
     @AppScope
     @Binds
     abstract fun dateFormatProvider(dateFormatProviderImpl: DateFormatProviderImpl): DateFormatProvider
-
-    @AppScope
-    @Binds
-    abstract fun stationsRemoteDataSource(source: StationsRemoteDataSourceImpl): StationsRemoteDataSource
-
-    @AppScope
-    @Binds
-    abstract fun stationsDataProvider(provider: StationsRepository): StationsDataProvider
 }
