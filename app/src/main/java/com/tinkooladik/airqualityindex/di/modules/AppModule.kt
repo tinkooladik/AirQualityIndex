@@ -1,7 +1,5 @@
 package com.tinkooladik.airqualityindex.di.modules
 
-import android.app.Application
-import android.content.Context
 import com.tinkooladik.airqualityindex.SchedulersProviderImpl
 import com.tinkooladik.airqualityindex.domain.SchedulersProvider
 import com.tinkooladik.airqualityindex.domain.providers.LocationBoundsProvider
@@ -11,11 +9,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class AppModule(private val app: Application) {
-
-    @Provides
-    @Singleton
-    fun context(): Context = app
+class AppModule {
 
     @Provides
     @Singleton

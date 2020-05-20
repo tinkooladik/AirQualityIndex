@@ -1,6 +1,6 @@
 package com.tinkooladik.airqualityindex.di.modules
 
-import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.tinkooladik.airqualityindex.BuildConfig
 import com.tinkooladik.airqualityindex.data.local.AppDatabase
@@ -15,9 +15,12 @@ import javax.inject.Singleton
 private const val DB_NAME = "app_db"
 
 @Module
-class DataModule(app: Application) {
+class DataModule {
 
-    private val db = Room.databaseBuilder(app, AppDatabase::class.java, DB_NAME).build()
+    @Provides
+    @Singleton
+    fun provideDb(context: Context): AppDatabase =
+        Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME).build()
 
     @Provides
     @Singleton
@@ -26,6 +29,7 @@ class DataModule(app: Application) {
     @Provides
     @Singleton
     fun stationsLocalDataSource(
+        db: AppDatabase,
         localStationDataMapper: LocalStationDataMapper
     ): StationsLocalDataSource = StationsRoomDataSource(db.stationsDao(), localStationDataMapper)
 

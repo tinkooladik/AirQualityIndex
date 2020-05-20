@@ -2,7 +2,7 @@ package com.tinkooladik.airqualityindex.data
 
 import timber.log.Timber
 
-private const val defaultTag: String = "kuskus"
+private val defaultTag: String? = null
 
 fun Any.log(message: String, throwable: Throwable? = null, tag: String? = defaultTag) {
     Timber.tag(tag ?: this.javaClass.simpleName).run {
