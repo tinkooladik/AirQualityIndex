@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'scabbard.gradle'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -35,6 +36,12 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    scabbard {
+        enabled !gradle.startParameter.toString().contains("assembleRelease")
+        outputFormat "svg"
+//        fullBindingGraphValidation true
     }
 }
 

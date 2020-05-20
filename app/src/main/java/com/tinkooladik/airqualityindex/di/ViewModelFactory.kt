@@ -4,10 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tinkooladik.airqualityindex.common.base.BaseViewModel
 import com.tinkooladik.airqualityindex.domain.UnknownViewModel
-import javax.inject.Inject
 import javax.inject.Provider
 
-class ViewModelFactory @Inject constructor(
+class ViewModelFactory(
     private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<BaseViewModel>>
 ) : ViewModelProvider.Factory {
 

@@ -1,5 +1,6 @@
 package com.tinkooladik.airqualityindex.di.modules
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tinkooladik.airqualityindex.common.base.BaseViewModel
 import com.tinkooladik.airqualityindex.data.local.AppDatabase
@@ -18,39 +19,19 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
+import javax.inject.Provider
 
 @Module
-abstract class HomeModule : HomeModuleDependencies() {
-
-    @FragmentScope
-    @ContributesAndroidInjector
-    abstract fun homeFragment(): HomeFragment
-
-    @FragmentScope
-    @ContributesAndroidInjector
-    abstract fun detailsFragment(): StationDetailsFragment
-
-    @ActivityScope
-    @Binds
-    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-
-    @FragmentScope
-    @Binds
-    @IntoMap
-    @ViewModelKey(HomeViewModel::class)
-    abstract fun bindHomeViewModel(vm: HomeViewModel): BaseViewModel
-
-    @FragmentScope
-    @Binds
-    @IntoMap
-    @ViewModelKey(StationDetailsViewModel::class)
-    abstract fun bindDetailsViewModel(vm: StationDetailsViewModel): BaseViewModel
-}
-
-@Module
-abstract class HomeModuleDependencies {
+abstract class HomeModule : HomeModuleInjectors() {
 
     companion object {
+
+        @ActivityScope
+        @Provides
+        fun bindViewModelFactory(
+            creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<BaseViewModel>>
+        ): ViewModelProvider.Factory =
+            ViewModelFactory(creators)
 
         @ActivityScope
         @Provides
@@ -69,4 +50,28 @@ abstract class HomeModuleDependencies {
     @ActivityScope
     @Binds
     abstract fun stationsDataProvider(provider: StationsRepository): StationsDataProvider
+}
+
+@Module
+abstract class HomeModuleInjectors {
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun homeFragment(): HomeFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun detailsFragment(): StationDetailsFragment
+
+    @ActivityScope
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindHomeViewModel(vm: HomeViewModel): BaseViewModel
+
+    @ActivityScope
+    @Binds
+    @IntoMap
+    @ViewModelKey(StationDetailsViewModel::class)
+    abstract fun bindDetailsViewModel(vm: StationDetailsViewModel): BaseViewModel
 }

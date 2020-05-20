@@ -15,17 +15,14 @@ import com.tinkooladik.airqualityindex.common.message.MessageHandler
 import com.tinkooladik.airqualityindex.common.message.ToastMessageHandler
 import com.tinkooladik.airqualityindex.common.protocol.LiveDataObserveProtocol
 import com.tinkooladik.airqualityindex.common.protocol.PermissionsProtocol
-import com.tinkooladik.airqualityindex.di.ViewModelFactory
 import com.tinkooladik.airqualityindex.util.checkPermissions
 import javax.inject.Inject
 
-abstract class BaseBindingFragment<B : ViewDataBinding, VM : BaseViewModel> :
-    BaseFragment(),
-    LiveDataObserveProtocol,
-    PermissionsProtocol, ErrorHandler {
+abstract class BaseBindingFragment<B : ViewDataBinding, VM : BaseViewModel> : BaseFragment(),
+    LiveDataObserveProtocol, PermissionsProtocol, ErrorHandler {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
     lateinit var viewModel: VM
