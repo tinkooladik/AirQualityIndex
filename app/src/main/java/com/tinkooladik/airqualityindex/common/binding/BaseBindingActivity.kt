@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.tinkooladik.airqualityindex.common.base.BaseActivity
 import com.tinkooladik.airqualityindex.common.base.BaseViewModel
+import com.tinkooladik.airqualityindex.common.protocol.LiveDataObserveProtocol
 import javax.inject.Inject
 
 abstract class BaseBindingActivity<B : ViewDataBinding, VM : BaseViewModel> : BaseActivity(),

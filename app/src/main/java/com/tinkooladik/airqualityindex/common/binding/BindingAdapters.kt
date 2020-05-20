@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.common
+package com.tinkooladik.airqualityindex.common.binding
 
 import android.widget.Spinner
 import android.widget.TextView

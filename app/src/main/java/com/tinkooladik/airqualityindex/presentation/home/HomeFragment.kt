@@ -3,24 +3,21 @@ package com.tinkooladik.airqualityindex.presentation.home
 import android.Manifest
 import android.os.Bundle
 import android.view.View
-import androidx.core.app.ActivityCompat
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.tinkooladik.airqualityindex.BR
 import com.tinkooladik.airqualityindex.R
-import com.tinkooladik.airqualityindex.common.LayoutSettings
 import com.tinkooladik.airqualityindex.common.adapter.SimpleAdapter
 import com.tinkooladik.airqualityindex.common.binding.BaseBindingFragment
+import com.tinkooladik.airqualityindex.common.protocol.LayoutSettings
+import com.tinkooladik.airqualityindex.common.protocol.RequiredPermissions
 import com.tinkooladik.airqualityindex.databinding.FragmentHomeBinding
-import com.tinkooladik.airqualityindex.util.checkPermissions
 import com.tinkooladik.airqualityindex.util.initWithAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
-private val requiredPermissions = arrayOf(
-    Manifest.permission.ACCESS_COARSE_LOCATION,
-    Manifest.permission.ACCESS_FINE_LOCATION
+@RequiredPermissions(
+    permissions = [Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION]
 )
-
 @LayoutSettings(layoutId = R.layout.fragment_home)
 class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), HomeErrorHandler {
 
@@ -40,17 +37,6 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
             findNavController().navigate(
                 ActionFragmentHomeToFragmentDetails(station.id ?: 0)
             )
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        val permissionsGranted = checkPermissions(requiredPermissions)
-        viewModel.permissionsGranted(permissionsGranted)
-
-        if (!permissionsGranted) {
-            ActivityCompat.requestPermissions(requireActivity(), requiredPermissions, 0)
         }
     }
 }

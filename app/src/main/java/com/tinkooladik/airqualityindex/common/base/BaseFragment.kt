@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tinkooladik.airqualityindex.common.LayoutSettingsProtocol
+import com.tinkooladik.airqualityindex.common.protocol.LayoutSettingsProtocol
 import com.tinkooladik.airqualityindex.util.inflate
 import dagger.android.support.DaggerFragment
 
-abstract class BaseFragment : DaggerFragment(), LayoutSettingsProtocol {
+abstract class BaseFragment : DaggerFragment(),
+    LayoutSettingsProtocol {
 
     override fun onCreateView(
         inflater: LayoutInflater,

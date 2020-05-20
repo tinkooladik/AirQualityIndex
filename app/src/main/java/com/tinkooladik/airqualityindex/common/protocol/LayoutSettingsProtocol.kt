@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.common
+package com.tinkooladik.airqualityindex.common.protocol
 
 import androidx.annotation.LayoutRes
 

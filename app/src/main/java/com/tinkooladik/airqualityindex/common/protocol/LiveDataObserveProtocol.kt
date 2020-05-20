@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.common.binding
+package com.tinkooladik.airqualityindex.common.protocol
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner

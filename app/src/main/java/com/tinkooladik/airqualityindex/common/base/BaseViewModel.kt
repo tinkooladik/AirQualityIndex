@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.tinkooladik.airqualityindex.util.SingleLiveEvent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.subjects.BehaviorSubject
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -15,7 +16,10 @@ abstract class BaseViewModel : ViewModel() {
         get() = _error
 
     protected val _error = SingleLiveEvent<Throwable>()
-//    protected val _nav = SingleLiveEvent<>
+
+    protected val permissionsGranted by lazy {
+        BehaviorSubject.createDefault(false)
+    }
 
     private var disposables: CompositeDisposable = CompositeDisposable()
 
@@ -24,6 +28,10 @@ abstract class BaseViewModel : ViewModel() {
     override fun onCleared() {
         disposables.clear()
         super.onCleared()
+    }
+
+    fun permissionsGranted(granted: Boolean) {
+        permissionsGranted.onNext(granted)
     }
 
     protected fun Disposable.disposeOnClear() = disposables.add(this)
