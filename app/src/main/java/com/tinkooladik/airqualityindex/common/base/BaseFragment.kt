@@ -1,24 +1,14 @@
 package com.tinkooladik.airqualityindex.common.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.tinkooladik.airqualityindex.common.LayoutSettingsProtocol
-import com.tinkooladik.airqualityindex.di.AppGraph
-import com.tinkooladik.airqualityindex.di.HasAppGraph
 import com.tinkooladik.airqualityindex.util.inflate
+import dagger.android.support.DaggerFragment
 
-abstract class BaseFragment : Fragment(), LayoutSettingsProtocol {
-
-    lateinit var appGraph: AppGraph
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        appGraph = (context.applicationContext as HasAppGraph).appGraph()
-    }
+abstract class BaseFragment : DaggerFragment(), LayoutSettingsProtocol {
 
     override fun onCreateView(
         inflater: LayoutInflater,

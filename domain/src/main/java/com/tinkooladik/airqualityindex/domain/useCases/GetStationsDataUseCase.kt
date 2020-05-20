@@ -43,6 +43,5 @@ class GetStationsDataUseCase @Inject constructor(
             if (index != 0) return index
             return p0.id.compareTo(p1.id)
         }
-
     }
 }

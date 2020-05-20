@@ -54,6 +54,7 @@ dependencies {
     implementation uiLibs.values()
 
     //dagger
-    implementation libs.dagger
+    implementation dagger.values()
     kapt libs.daggerCompiler
+    kapt libs.daggerAndroidProcessor
 }

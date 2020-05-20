@@ -1,5 +1,7 @@
 package com.tinkooladik.airqualityindex.di.modules
 
+import android.content.Context
+import com.tinkooladik.airqualityindex.AirApp
 import com.tinkooladik.airqualityindex.SchedulersProviderImpl
 import com.tinkooladik.airqualityindex.di.AppScope
 import com.tinkooladik.airqualityindex.domain.SchedulersProvider
@@ -10,6 +12,10 @@ import dagger.Module
 
 @Module
 interface AppModule {
+
+    @AppScope
+    @Binds
+    fun context(app: AirApp): Context
 
     @AppScope
     @Binds

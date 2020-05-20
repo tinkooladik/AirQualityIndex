@@ -1,7 +1,6 @@
 package com.tinkooladik.airqualityindex.presentation.home
 
 import android.Manifest
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavDirections
@@ -25,11 +24,6 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
     override fun getVar(): Int = BR.viewModel
 
     val adapter = SimpleAdapter<StationVM>(R.layout.item_home_station, BR.station)
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        appGraph.inject(this)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
