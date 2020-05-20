@@ -7,6 +7,7 @@ import com.tinkooladik.airqualityindex.R
 import com.tinkooladik.airqualityindex.domain.UnknownException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 
 interface ErrorHandler {
@@ -25,6 +26,7 @@ interface ErrorHandler {
             is UnknownException -> resources.getString(R.string.error_unknown_error)
             is ConnectException -> resources.getString(R.string.error_no_connection)
             is SocketTimeoutException -> resources.getString(R.string.error_no_connection)
+            is UnknownHostException -> resources.getString(R.string.error_no_connection)
             else -> error?.message
         }
         function.invoke(message)
