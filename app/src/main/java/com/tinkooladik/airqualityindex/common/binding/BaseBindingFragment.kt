@@ -41,6 +41,7 @@ abstract class BaseBindingFragment<B : ViewDataBinding, VM : BaseViewModel> :
 
     open fun initViewModel() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(viewModel.javaClass)
+        viewModel.initViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -15,7 +15,7 @@ class GetStationsDataUseCase @Inject constructor(
 ) : ObservableUseCase<GetStationsDataUseCase.Params, List<StationData>>(schedulersProvider) {
 
     override fun buildObservable(params: Params): Observable<List<StationData>> {
-        return locationBoundsProvider.getBounds((params.radius * 1000).toDouble())
+        return locationBoundsProvider.getBounds(params.radiusInMeters.toDouble())
             .subscribeOn(schedulerProvider.ui())
             .observeOn(schedulerProvider.io())
             .flatMapObservable { bounds ->
@@ -35,7 +35,9 @@ class GetStationsDataUseCase @Inject constructor(
     data class Params(
         val radius: Int,
         val minIndex: Int
-    )
+    ) {
+        val radiusInMeters = radius * 1000
+    }
 
     object StationsComparator : Comparator<StationData> {
         override fun compare(p0: StationData, p1: StationData): Int {

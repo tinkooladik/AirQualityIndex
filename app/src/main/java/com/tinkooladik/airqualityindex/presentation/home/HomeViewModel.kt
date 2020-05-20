@@ -31,14 +31,16 @@ class HomeViewModel @Inject constructor(
 
     private var radiusSubject = BehaviorSubject.createDefault(DEFAULT_RADIUS)
     private var minIndexSubject = BehaviorSubject.createDefault(DEFAULT_MIN_INDEX)
+    private val permissionsGranted = BehaviorSubject.createDefault(false)
 
     private val _items = SingleLiveEvent<List<StationVM>>()
 
-    fun start() {
+    override fun initViewModel() {
         Observables.combineLatest(
+            permissionsGranted,
             radiusSubject.distinctUntilChanged(),
             minIndexSubject.distinctUntilChanged()
-        ) { r, i -> loadStations(r, i) }
+        ) { permission, radius, index -> if (permission) loadStations(radius, index) }
             .subscribe()
             .disposeOnClear()
     }
@@ -51,6 +53,10 @@ class HomeViewModel @Inject constructor(
     //todo use binding adapter instead
     fun selectMinIndex(pos: Int) {
         minIndexSubject.onNext(minIndexValues[pos])
+    }
+
+    fun permissionsGranted(granted: Boolean) {
+        permissionsGranted.onNext(granted)
     }
 
     private fun loadStations(radius: Int, minIndex: Int) {

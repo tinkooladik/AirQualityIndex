@@ -3,6 +3,7 @@ package com.tinkooladik.airqualityindex.presentation.home
 import android.Manifest
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.tinkooladik.airqualityindex.BR
@@ -11,13 +12,15 @@ import com.tinkooladik.airqualityindex.common.LayoutSettings
 import com.tinkooladik.airqualityindex.common.adapter.SimpleAdapter
 import com.tinkooladik.airqualityindex.common.binding.BaseBindingFragment
 import com.tinkooladik.airqualityindex.databinding.FragmentHomeBinding
+import com.tinkooladik.airqualityindex.util.checkPermissions
 import com.tinkooladik.airqualityindex.util.initWithAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
-import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.OnPermissionDenied
-import permissions.dispatcher.RuntimePermissions
 
-@RuntimePermissions
+private val requiredPermissions = arrayOf(
+    Manifest.permission.ACCESS_COARSE_LOCATION,
+    Manifest.permission.ACCESS_FINE_LOCATION
+)
+
 @LayoutSettings(layoutId = R.layout.fragment_home)
 class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), HomeErrorHandler {
 
@@ -38,34 +41,17 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
                 ActionFragmentHomeToFragmentDetails(station.id ?: 0)
             )
         }
-
-        loadStationsWithPermissionCheck()
     }
 
-    @NeedsPermission(
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION
-    )
-    fun loadStations() {
-        viewModel.start()
-    }
+    override fun onResume() {
+        super.onResume()
 
-    @OnPermissionDenied(
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION
-    )
-    fun onLocationDenied() {
-        //todo handle this
-        loadStationsWithPermissionCheck()
-    }
+        val permissionsGranted = checkPermissions(requiredPermissions)
+        viewModel.permissionsGranted(permissionsGranted)
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode, grantResults)
+        if (!permissionsGranted) {
+            ActivityCompat.requestPermissions(requireActivity(), requiredPermissions, 0)
+        }
     }
 }
 
