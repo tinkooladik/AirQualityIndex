@@ -8,7 +8,6 @@ import com.tinkooladik.airqualityindex.domain.NoLocationException
 import com.tinkooladik.airqualityindex.domain.providers.LatLng
 import com.tinkooladik.airqualityindex.domain.providers.LatLngBounds
 import com.tinkooladik.airqualityindex.domain.providers.LocationBoundsProvider
-import com.tinkooladik.airqualityindex.domain.weak
 import com.tinkooladik.airqualityindex.util.computeOffset
 import io.reactivex.Single
 import javax.inject.Inject
@@ -28,16 +27,13 @@ class FusedLocationBoundsProvider @Inject constructor(context: Context) : Locati
 
     private fun getLocation(): Single<Location> =
         Single.defer {
-            Single.create<Location> {
-                val emitter by weak(it)
+            Single.create<Location> { emitter ->
                 fusedLocationClient.lastLocation
                     .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            task.result?.let { location ->
-                                emitter?.onSuccess(location)
-                            }
+                        if (task.isSuccessful && task.result != null) {
+                            emitter.onSuccess(task.result as Location)
                         } else {
-                            emitter?.onError(NoLocationException())
+                            emitter.onError(NoLocationException())
                         }
                     }
             }

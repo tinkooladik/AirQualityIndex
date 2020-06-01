@@ -10,7 +10,7 @@
         android:label="Home">
 
         <action
-            android:id="@+id/action_fragmentHome_to_fragmentDetails"
+            android:id="@+id/station_details"
             app:destination="@id/fragmentDetails" />
 
     </fragment>

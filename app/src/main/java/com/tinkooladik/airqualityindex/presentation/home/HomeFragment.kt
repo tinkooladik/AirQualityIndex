@@ -3,7 +3,6 @@ package com.tinkooladik.airqualityindex.presentation.home
 import android.Manifest
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.tinkooladik.airqualityindex.BR
 import com.tinkooladik.airqualityindex.R
@@ -35,19 +34,8 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding, HomeViewModel>(), 
         }
         adapter.onItemClickListener = { station ->
             findNavController().navigate(
-                ActionFragmentHomeToFragmentDetails(station.id ?: 0)
+                HomeFragmentDirections.stationDetails(station.id ?: 0)
             )
         }
-    }
-}
-
-data class ActionFragmentHomeToFragmentDetails(
-    val stationId: Int
-) : NavDirections {
-
-    override fun getActionId(): Int = R.id.action_fragmentHome_to_fragmentDetails
-
-    override fun getArguments(): Bundle {
-        return Bundle().apply { putInt("stationId", stationId) }
     }
 }
