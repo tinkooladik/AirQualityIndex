@@ -3,7 +3,7 @@ package com.tinkooladik.airqualityindex.common.base
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.tinkooladik.airqualityindex.util.SingleLiveEvent
+import com.tinkooladik.airqualityindex.common.SingleLiveEvent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject

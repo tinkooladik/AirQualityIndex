@@ -15,7 +15,7 @@ import com.tinkooladik.airqualityindex.common.message.MessageHandler
 import com.tinkooladik.airqualityindex.common.message.ToastMessageHandler
 import com.tinkooladik.airqualityindex.common.protocol.LiveDataObserveProtocol
 import com.tinkooladik.airqualityindex.common.protocol.PermissionsProtocol
-import com.tinkooladik.airqualityindex.util.checkPermissions
+import com.tinkooladik.airqualityindex.util.ext.checkPermissions
 import javax.inject.Inject
 
 abstract class BaseBindingFragment<B : ViewDataBinding, VM : BaseViewModel> : BaseFragment(),

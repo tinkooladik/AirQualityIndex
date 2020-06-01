@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tinkooladik.airqualityindex.common.protocol.LayoutSettingsProtocol
-import com.tinkooladik.airqualityindex.util.inflate
+import com.tinkooladik.airqualityindex.util.ext.inflate
 import dagger.android.support.DaggerFragment
 
 abstract class BaseFragment : DaggerFragment(),

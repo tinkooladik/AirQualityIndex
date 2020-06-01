@@ -12,7 +12,7 @@ import com.tinkooladik.airqualityindex.common.binding.BaseBindingFragment
 import com.tinkooladik.airqualityindex.common.protocol.LayoutSettings
 import com.tinkooladik.airqualityindex.common.protocol.RequiredPermissions
 import com.tinkooladik.airqualityindex.databinding.FragmentHomeBinding
-import com.tinkooladik.airqualityindex.util.initWithAdapter
+import com.tinkooladik.airqualityindex.util.ext.initWithAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
 @RequiredPermissions(

@@ -8,7 +8,7 @@ import com.tinkooladik.airqualityindex.di.AppScope
 import com.tinkooladik.airqualityindex.domain.SchedulersProvider
 import com.tinkooladik.airqualityindex.domain.providers.LocationBoundsProvider
 import com.tinkooladik.airqualityindex.presentation.MainActivity
-import com.tinkooladik.airqualityindex.util.FusedLocationBoundsProvider
+import com.tinkooladik.airqualityindex.util.providers.FusedLocationBoundsProvider
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.util
+package com.tinkooladik.airqualityindex.util.providers
 
 import android.content.Context
 import android.location.Location
@@ -9,6 +9,7 @@ import com.tinkooladik.airqualityindex.domain.providers.LatLng
 import com.tinkooladik.airqualityindex.domain.providers.LatLngBounds
 import com.tinkooladik.airqualityindex.domain.providers.LocationBoundsProvider
 import com.tinkooladik.airqualityindex.domain.weak
+import com.tinkooladik.airqualityindex.util.computeOffset
 import io.reactivex.Single
 import javax.inject.Inject
 import kotlin.math.sqrt

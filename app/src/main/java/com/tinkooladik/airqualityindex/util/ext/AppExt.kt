@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.util
+package com.tinkooladik.airqualityindex.util.ext
 
 import android.content.Context
 import android.content.pm.PackageManager

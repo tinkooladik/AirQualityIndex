@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.util
+package com.tinkooladik.airqualityindex.util.providers
 
 import com.tinkooladik.airqualityindex.data.DateFormatProvider
 import com.tinkooladik.airqualityindex.domain.DateFormatException

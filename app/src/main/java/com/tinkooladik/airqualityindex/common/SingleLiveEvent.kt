@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.util
+package com.tinkooladik.airqualityindex.common
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

@@ -8,7 +8,7 @@ import com.tinkooladik.airqualityindex.data.local.AppDatabase
 import com.tinkooladik.airqualityindex.data.remote.ApiService
 import com.tinkooladik.airqualityindex.data.remote.ApiServiceFactory
 import com.tinkooladik.airqualityindex.di.AppScope
-import com.tinkooladik.airqualityindex.util.DateFormatProviderImpl
+import com.tinkooladik.airqualityindex.util.providers.DateFormatProviderImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

@@ -1,10 +1,10 @@
 package com.tinkooladik.airqualityindex.presentation.home
 
 import androidx.lifecycle.LiveData
+import com.tinkooladik.airqualityindex.common.SingleLiveEvent
 import com.tinkooladik.airqualityindex.common.base.BaseViewModel
 import com.tinkooladik.airqualityindex.data.logError
 import com.tinkooladik.airqualityindex.domain.useCases.GetStationsDataUseCase
-import com.tinkooladik.airqualityindex.util.SingleLiveEvent
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.tinkooladik.airqualityindex.util
+package com.tinkooladik.airqualityindex.util.ext
 
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
@@ -39,7 +39,13 @@ fun RecyclerView.initWithAdapter(
     this.adapter = adapter
 
     if (dividerRes != null) {
-        addItemDecoration(getDivider(context, dividerRes, layoutManager))
+        addItemDecoration(
+            getDivider(
+                context,
+                dividerRes,
+                layoutManager
+            )
+        )
     }
 }
 
