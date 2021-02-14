@@ -1,6 +1,17 @@
+
+# Don't pay attention to this project - it has been written during one night, it's veeerry raw 
+
+
+##
+##
+##
+##
+##
+##
+##
+
 # AirQualityIndex
 test assignment
-
 
 Just a simple app that shows a list of AQI stations from https://aqicn.org/json-api/doc/
 
